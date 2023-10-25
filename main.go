@@ -58,8 +58,9 @@ func crawl(url string) {
 				}
 			}
 		}
-		for c := n.FirstChild; c != nil; c = c.NextSibling {
-			visitNode(c)
+		// Recursively traverse child nodes
+		for child := n.FirstChild; child != nil; child = child.NextSibling {
+			visitNode(child)
 		}
 	}
 	visitNode(doc)
