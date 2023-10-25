@@ -3,7 +3,8 @@ package main
 import (
 	"fmt"
 	"golang.org/x/net/html"
-	"net/http"
+	"log"
+	"os"
 )
 
 func main() {
@@ -13,7 +14,22 @@ func main() {
 
 // This function will crawl a Website
 func crawl(url string) {
-	resp, err := http.Get(url)
+
+	// Test html load
+	file, err := os.Open("example.html")
+	if err != nil {
+		log.Fatalf("Error opening file: %v", err)
+	}
+	defer file.Close()
+
+	// Parse the HTML file
+	doc, err := html.Parse(file)
+	if err != nil {
+		log.Fatalf("Error parsing HTML: %v", err)
+	}
+
+	// Go and get the Web resource response
+	/*resp, err := http.Get(url)
 	if err != nil {
 		fmt.Printf("Failed to crawl %s: %v\n", url, err)
 		return
@@ -30,6 +46,7 @@ func crawl(url string) {
 		fmt.Printf("Failed to parse HTML: %v\n", err)
 		return
 	}
+	*/
 
 	// Find all anchor tags in the HTML
 	var visitNode func(*html.Node)
