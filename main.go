@@ -11,6 +11,7 @@ func main() {
 	crawl(url)
 }
 
+// This function will crawl a Website
 func crawl(url string) {
 	resp, err := http.Get(url)
 	if err != nil {
